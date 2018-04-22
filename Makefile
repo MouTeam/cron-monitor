@@ -1,9 +1,11 @@
 DOCKER_COMPOSE  = docker-compose
 
 EXEC_PHP        = $(DOCKER_COMPOSE) exec -T php /entrypoint
+EXEC_JS         = $(DOCKER_COMPOSE) exec -T node /entrypoint
 
 SYMFONY         = $(EXEC_PHP) bin/console
 COMPOSER        = $(EXEC_PHP) composer
+NPM            = $(EXEC_JS) npm
 
 ##
 ## Cron Monitor Project
@@ -17,7 +19,7 @@ build:
 kill:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
 
-install: .env build start vendor                             ## Install and start the project
+install: .env build start db assets                          ## Install and start the project
 
 reset: kill install                                          ## Stop and start a fresh install of the project
 
@@ -28,7 +30,7 @@ stop:                                                        ## Stop the project
 	$(DOCKER_COMPOSE) down
 
 clean: kill                                                  ## Stop the project and remove generated files
-	rm -rf .env vendor
+	rm -rf .env vendor node_modules
 
 .PHONY: build kill install reset start stop clean
 
@@ -37,11 +39,23 @@ clean: kill                                                  ## Stop the project
 ## -----
 ##
 
+db: .env vendor                                              ## Reset the database and load fixtures
+	$(SYMFONY) doctrine:database:drop --if-exists --force
+	$(SYMFONY) doctrine:database:create --if-not-exists
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
+	$(SYMFONY) doctrine:fixtures:load --no-interaction --purge-with-truncate
+
+assets: node_modules                                         ## Run Webpack Encore to compile assets
+	$(NPM) run dev
+
+watch: node_modules                                          ## Run Webpack Encore in watch mode
+	$(NPM) run watch
+
 cc:                                                          ## Clear the cache in dev env
 	$(SYMFONY) cache:clear --no-warmup
 	$(SYMFONY) cache:warmup
 
-.PHONY: cc
+.PHONY: db assets watch cc
 
 # rules based on files
 composer.lock: composer.json
@@ -49,6 +63,13 @@ composer.lock: composer.json
 
 vendor: composer.lock
 	$(COMPOSER) install
+
+node_modules: package-lock.json
+	$(NPM) install
+	@touch -c node_modules
+
+package-lock.json: package.json
+	$(NPM) update
 
 .env: .env.dist
 	@if [ -f .env ]; \

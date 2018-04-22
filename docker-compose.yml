@@ -27,5 +27,12 @@ services:
     volumes:
       - ./:/srv/
 
+  node:
+    build:
+      context: ./docker/node
+    working_dir: /srv
+    volumes:
+      - ./:/srv/
+
 volumes:
   database: ~

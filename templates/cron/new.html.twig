@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cron{% endblock %}
+
+{% block body %}
+    <h1>Create new Cron</h1>
+
+    {{ include('cron/_form.html.twig') }}
+
+    <a href="{{ path('cron_index') }}">back to list</a>
+{% endblock %}

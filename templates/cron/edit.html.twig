@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cron{% endblock %}
+
+{% block body %}
+    <h1>Edit Cron</h1>
+
+    {{ include('cron/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('cron_index') }}">back to list</a>
+
+    {{ include('cron/_delete_form.html.twig') }}
+{% endblock %}

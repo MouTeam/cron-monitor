@@ -8,5 +8,6 @@ return PhpCsFixer\Config::create()
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->in('src')
+            ->exclude('Migrations')
     )
 ;
