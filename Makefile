@@ -71,7 +71,10 @@ lint: ly                                                     ## Lints twig and y
 ly: vendor
 	$(SYMFONY) lint:yaml config
 
-.PHONY: lint ly
+php-cs-fixer:                                                ## php-cs-fixer (http://cs.sensiolabs.org)
+	$(EXEC_PHP) ./vendor/bin/php-cs-fixer fix --verbose --diff
+
+.PHONY: lint ly php-cs-fixer
 
 .DEFAULT_GOAL := help
 help:
