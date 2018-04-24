@@ -34,5 +34,8 @@ services:
     volumes:
       - ./:/srv/
 
+  maildev:
+    image: djfarrelly/maildev:1.0.0-rc2
+
 volumes:
   database: ~

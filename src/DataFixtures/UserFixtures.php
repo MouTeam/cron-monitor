@@ -12,9 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
  */
 class UserFixtures extends Fixture
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
+    /** @var UserPasswordEncoderInterface */
     private $passwordEncoder;
 
     /**
@@ -25,18 +23,25 @@ class UserFixtures extends Fixture
         $this->passwordEncoder = $passwordEncoder;
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     public function load(ObjectManager $manager)
     {
         $admin = new User();
-        $admin->setUsername('admin@email.fr');
-        $admin->setIsActive(1);
+        $admin->setUsername('admin');
+        $admin->setEmail('admin@email.fr');
+        $admin->setEnabled(true);
+        $admin->addRole('ROLE_ADMIN');
         $admin->setPassword($this->passwordEncoder->encodePassword($admin, 'admin'));
 
         $manager->persist($admin);
 
         $user = new User();
-        $user->setUsername('user@email.fr');
-        $user->setIsActive(1);
+        $user->setUsername('user');
+        $user->setEmail('user@email.fr');
+        $user->setEnabled(false);
+        $admin->addRole('ROLE_USER');
         $user->setPassword($this->passwordEncoder->encodePassword($user, 'user'));
 
         $manager->persist($user);

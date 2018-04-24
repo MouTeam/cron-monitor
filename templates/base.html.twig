@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="{{ app.request.locale  }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,14 +8,59 @@
 
     {% block stylesheets %}{% endblock %}
 
-    <title>{% block title %}Hello World !{% endblock %}</title>
+    <title>{% block title %}Cron Monitor{% endblock %}</title>
 </head>
 <body>
-    <div class="container">
-        {% block body %}{% endblock %}
-    </div>
+    {% block navbar %}
+        {% include '_partials/navbar.html.twig' %}
+    {% endblock %}
+
+    {% include '_partials/flash.html.twig' %}
+
+    {% block body %}{% endblock %}
+
+    {% include '_partials/footer.html.twig' %}
 
     <script src="{{ asset('build/js/app.js') }}"></script>
+
+    {% if app.environment == 'dev' and app.debug %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Development</h5>
+                            <button class="btn btn-primary card-link" type="button" onclick="testBootlint()">Bootlint</button>
+                            <button class="btn btn-primary card-link" type="button" data-toggle="collapse" data-target="#dumpUser" aria-expanded="false" aria-controls="collapseExample">
+                                Dump current user
+                            </button>
+                            <button class="btn btn-primary card-link" type="button" data-toggle="collapse" data-target="#dumpSession" aria-expanded="false" aria-controls="collapseExample">
+                                Dump current session
+                            </button>
+                                <div class="collapse" id="dumpUser">
+                                    {{ dump(app.user) }}
+                                </div>
+                                <div class="collapse" id="dumpSession">
+                                    {{ dump(app.session) }}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function testBootlint() {
+                var s = document.createElement("script");
+                s.onload = function () {
+                    bootlint.showLintReportForCurrentDocument([]);
+                };
+                s.src = "https://rawgit.com/Herst/bootlint/v4/dist/browser/bootlint.js";
+                document.body.appendChild(s)
+            }
+        </script>
+    {% endif %}
 
     {% block javascripts %} {% endblock %}
 </body>

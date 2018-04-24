@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @author Alexandre PAVY <pavy.alexandre@gmail.com>
+ *
  * @Route("/cron")
  */
 class CronController extends Controller

@@ -83,6 +83,9 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "egulias/email-validator": {
+        "version": "2.1.4"
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -91,6 +94,9 @@
             "version": "2.2",
             "ref": "81dee417d2cc60cd1c9d6208dff2ec22a1103e93"
         }
+    },
+    "friendsofsymfony/user-bundle": {
+        "version": "v2.1.2"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -106,6 +112,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.0"
+    },
+    "paragonie/random_compat": {
+        "version": "v2.0.12"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -139,6 +148,12 @@
             "version": "4.0",
             "ref": "e65a105bf4cd5b1b79012ba029954927f05922e8"
         }
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.0.2"
+    },
+    "symfony/<security": {
+        "version": "v4.0.8"
     },
     "symfony/asset": {
         "version": "v4.0.8"
@@ -281,6 +296,9 @@
             "ref": "cda8b550123383d25827705d05a42acf6819fe4e"
         }
     },
+    "symfony/security": {
+        "version": "v4.0.8"
+    },
     "symfony/security-bundle": {
         "version": "3.3",
         "recipe": {
@@ -294,6 +312,18 @@
         "version": "v4.0.8"
     },
     "symfony/stopwatch": {
+        "version": "v4.0.8"
+    },
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "3db029c03e452b4a23f7fc45cec7c922c2247eb8"
+        }
+    },
+    "symfony/templating": {
         "version": "v4.0.8"
     },
     "symfony/translation": {
