@@ -27,5 +27,15 @@ services:
     volumes:
       - ./:/srv/
 
+  node:
+    build:
+      context: ./docker/node
+    working_dir: /srv
+    volumes:
+      - ./:/srv/
+
+  maildev:
+    image: djfarrelly/maildev:1.0.0-rc2
+
 volumes:
   database: ~

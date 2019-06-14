@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Dashboard</h1>
+
+    <a href="{{ path('cron_index') }}">Show my cron</a>
+    <a href="{{ path('homepage') }}">Show homepage</a>
+    <a href="{{ logout_path() }}">logout</a>
+{% endblock %}
+

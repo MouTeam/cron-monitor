@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cron{% endblock %}
+
+{% block body %}
+    <h1>Cron</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cron.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ cron.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cron_index') }}">back to list</a>
+
+    <a href="{{ path('cron_edit', {'id': cron.id}) }}">edit</a>
+
+    {{ include('cron/_delete_form.html.twig') }}
+{% endblock %}
